@@ -30,12 +30,12 @@ public class PostEntity {
     private String title;
     @Column(
             name = "content",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
     )
     private String content;
     @Column(
-            name = "created_date",
-            columnDefinition = "TEXT"
+            name = "created_date"
     )
     private LocalDate createdDate;
     @Column(

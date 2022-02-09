@@ -1,6 +1,8 @@
 package com.nvkha.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Post {
     private Long id;
@@ -71,6 +73,11 @@ public class Post {
 
     public void setModifiedDate(LocalDate modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getDateFormat() {
+        String text = this.createdDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return text;
     }
 
     @Override

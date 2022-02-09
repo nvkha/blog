@@ -61,6 +61,22 @@ public class CommentService implements ICommentService {
     }
 
     @Override
+    public List<Comment> getAllCommentByPost(Long postId) {
+        List<CommentEntity> commentEntities = commentRepository.findAllByPost(postId.longValue());
+        System.out.println(commentEntities);
+        List<Comment> comments = new ArrayList<>();
+        for(CommentEntity commentEntity : commentEntities) {
+            Comment newComment = new Comment();
+            newComment.setId(commentEntity.getId());
+            newComment.setPost(commentEntity.getPost());
+            newComment.setContent(commentEntity.getContent());
+            newComment.setCreatedDate(commentEntity.getCreatedDate());
+            comments.add(newComment);
+        }
+        return comments;
+    }
+
+    @Override
     public List<Comment> getAllComment() {
         List<Comment> comments = new ArrayList<>();
         List<CommentEntity> commentEntities = commentRepository.findAll();

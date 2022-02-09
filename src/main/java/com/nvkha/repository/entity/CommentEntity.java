@@ -88,4 +88,14 @@ public class CommentEntity {
     public void setPost(PostEntity post) {
         this.post = post;
     }
+
+    @Override
+    public String toString() {
+        return "CommentEntity{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
+                ", post=" + post +
+                '}';
+    }
 }

@@ -1,27 +1,30 @@
 package com.nvkha.controller;
 
 import com.nvkha.model.Comment;
+import com.nvkha.repository.entity.CommentEntity;
+import com.nvkha.service.ICommentService;
 import com.nvkha.service.impl.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/api/v1/comment")
+@RequestMapping(path = "/api/v1/comments")
 public class CommentController {
-    private final CommentService commentService;
+    private final ICommentService commentService;
 
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
-    @GetMapping
-    public List<Comment> getAllComment() {
-        return commentService.getAllComment();
+    @GetMapping()
+    public List<Comment> getAllCommentByPost(@RequestParam Long postId) {
+        return commentService.getAllCommentByPost(postId);
     }
 
     @PostMapping

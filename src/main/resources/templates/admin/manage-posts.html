@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<script></script>
+<!--Header-->
+<head th:replace="fragments/header :: header"></head>
+
+<!--Alert-->
+<div th:if="${message != null}">
+    <div th:replace="fragments/alert :: alert"></div>
+</div>
+
+<!--Main Content-->
+<div class="container-fluid">
+    <div class="btn-toolbar mt-3 mb-2 mb-md-0">
+        <a href="/admin/manage-posts/create" type="button" class="btn btn-sm btn-outline-secondary mr-2">Add new post</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Create Date</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post: ${posts}">
+            <th th:text="${post.getId()}" scope="row"></th>
+            <td th:text="${post.getTitle()}"></td>
+            <td th:text="${post.getDateFormat()}"></td>
+            <td>
+                <form class="mb-2" th:action="@{|/admin/manage-posts/delete/${post.getId()}|}" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary mr-2">Delete</button>
+                </form>
+                <form th:action="@{|/admin/manage-posts/edit/${post.getId()}|}" method="get">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary mr-2">Edit</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${page.getTotalPages() > 0}">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|/?page=${0}|}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:each="i: ${#numbers.sequence(0, page.getTotalPages() - 1)}" class="page-item">
+                    <a class="page-link" th:href="@{|/admin/manage-posts?page=${i}|}" th:text="${i + 1}"></a></li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{|/admin/manage-posts?page=${page.getTotalPages() - 1}|}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<!--Footer-->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

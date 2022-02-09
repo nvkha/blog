@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="alert" role="alert" class="alert alert-dismissible fade show" th:classappend="'alert-' + ${type}">
+    <span th:text="${message}">Test</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</body>
+</html>

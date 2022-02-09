@@ -6,13 +6,15 @@ import com.nvkha.repository.entity.PostEntity;
 import com.nvkha.service.IPostService;
 import com.nvkha.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class PostService implements IPostService {
@@ -24,18 +26,20 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<Post> getAllPost() {
-        List<Post> posts = new ArrayList<>();
-        List<PostEntity> postEntities = postRepository.findAll();
-        for(PostEntity postEntity : postEntities) {
-            Post newPost = new Post();
-            newPost.setId(postEntity.getId());
-            newPost.setTitle(postEntity.getTitle());
-            newPost.setContent(postEntity.getContent());
-            newPost.setCreatedDate(postEntity.getCreatedDate());
-            newPost.setModifiedDate(postEntity.getModifiedDate());
-            posts.add(newPost);
-        }
+    public Page<Post> getAllPost(Integer page, String sortBy) {
+        Page<PostEntity> postEntities = postRepository.findAll(PageRequest.of(page, 5));
+        Page<Post> posts = postEntities.map(new Function<PostEntity, Post>() {
+            @Override
+            public Post apply(PostEntity postEntity) {
+                Post newPost = new Post();
+                newPost.setId(postEntity.getId());
+                newPost.setCreatedDate(postEntity.getCreatedDate());
+                newPost.setModifiedDate(postEntity.getModifiedDate());
+                newPost.setTitle(postEntity.getTitle());
+                newPost.setContent(postEntity.getContent());
+                return newPost;
+            }
+        });
         return posts;
     }
 
@@ -75,5 +79,20 @@ public class PostService implements IPostService {
         if(modifiedDate != null) {
             postEntity.setModifiedDate(modifiedDate);
         }
+    }
+
+    @Override
+    public Post getPostById(Long postId) {
+        Optional<PostEntity> optionalPost = postRepository.findById(postId);
+        if(!optionalPost.isPresent()) {
+            throw new IllegalStateException("Post not exits");
+        }
+        Post post = new Post();
+        post.setId(optionalPost.get().getId());
+        post.setTitle(optionalPost.get().getTitle());
+        post.setContent(optionalPost.get().getContent());
+        post.setCreatedDate(optionalPost.get().getCreatedDate());
+        post.setModifiedDate(optionalPost.get().getModifiedDate());
+        return post;
     }
 }

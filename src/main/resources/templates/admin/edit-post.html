@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<script></script>
+<!--Header-->
+<head th:replace="fragments/header :: header"></head>
+
+<!--Alert-->
+<div th:if="${message != null}">
+    <div th:replace="fragments/alert :: alert"></div>
+</div>
+
+<!--Main Content-->
+<div class="container">
+    <form style="max-width: 600px; margin: auto">
+        <h1 class="mt-3 mb-3">Edit Post</h1>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input th:value="${post.getTitle()}" id="title" type="text" class="form-control">
+        </div>
+        <div class="form-group mt-3">
+            <label for="content">Content</label>
+            <textarea th:text="${post.getContent()}" class="form-control" id="content" rows="10"></textarea>
+        </div>
+        <div class="form-group mt-2">
+            <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+
+<!--Footer-->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

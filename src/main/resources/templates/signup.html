@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<!--Alert-->
+<div th:if="${message != null}">
+    <div th:replace="fragments/alert :: alert"></div>
+</div>
+
+<div class="container">
+    <form style="max-width: 400px; margin: 10px auto">
+    <h2 class="form-signin-heading">Please sign up</h2>
+    <p>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+    </p>
+    <p>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    </p>
+    <button id="btnSignup" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+</div>
+
+<!--Footer-->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

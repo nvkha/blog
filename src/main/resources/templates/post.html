@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+<!--Header-->
+<head th:replace="fragments/header :: header"></head>
+
+<!--Main Content-->
+<div class="container">
+    <!--Posts-->
+    <div class="post">
+        <h1 th:text="${post.getTitle()}"></h1>
+        <span th:text="${post.getDateFormat()}"></span><br>
+        <p th:text="${post.getContent()}"></p>
+
+        <!--Comment-->
+        <div class="form-group mt-3">
+            <textarea id="comment" class="form-control col-5" rows="3" placeholder="Enter your comment"></textarea>
+        </div>
+        <button id="btnComment" type="button" class="btn btn-dark mt-2 mb-3">Submit</button>
+
+        <!--Display Comment-->
+        <div th:each="comment: ${comments}">
+            <p th:text="${comment.getContent()}"></p>
+        </div>
+    </div>
+</div>
+
+<!--Footer-->
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

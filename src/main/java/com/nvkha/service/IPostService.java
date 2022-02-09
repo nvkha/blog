@@ -1,17 +1,18 @@
 package com.nvkha.service;
 
 import com.nvkha.model.Post;
-import com.nvkha.repository.entity.PostEntity;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public interface IPostService {
-    List<Post> getAllPost();
+    Page<Post> getAllPost(Integer page, String sortBy);
 
     void addNewPost(Post post);
 
     void deletePost(Long postId);
 
     void updatePost(Long postId, String title, String content, LocalDate modifiedDate);
+
+    Post getPostById(Long postId);
 }

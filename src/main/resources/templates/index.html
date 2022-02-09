@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
 <body>
-    <h1>Hello World</h1>
+<!--Header-->
+<div th:replace="fragments/header :: header"></div>
+
+<!--Alert-->
+<div th:if="${message != null}">
+    <div th:replace="fragments/alert :: alert"></div>
+</div>
+
+
+<!--Main Content-->
+<div class="container">
+    <!--Posts-->
+    <div th:each="post: ${posts}">
+        <div class="d-flex justify-content-center">
+            <div class="post mt-3">
+                <h3 th:text="${post.getTitle()}"></h3>
+                <span th:class="post-date" th:text="${post.getDateFormat()}"></span><br>
+                <span th:text="${#strings.abbreviate(post.getContent(), 100)}"></span>
+                <a th:href="@{/posts/{id}(id = ${post.getId()})}"> Read more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${page.getTotalPages() > 0}">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|/?page=${0}|}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="i: ${#numbers.sequence(0, page.getTotalPages() - 1)}" class="page-item">
+                <a class="page-link" th:href="@{|/?page=${i}|}" th:text="${i + 1}"></a></li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{|/?page=${page.getTotalPages() - 1}|}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!--Footer-->
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

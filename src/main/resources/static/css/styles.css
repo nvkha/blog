@@ -10,5 +10,9 @@ textarea {
     max-width: 600px;
 }
 
+footer {
+    min-height: 100px;
+}
+
 
 

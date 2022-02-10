@@ -3,6 +3,7 @@ package com.nvkha.config;
 import com.nvkha.repository.CommentRepository;
 import com.nvkha.repository.PostRepository;
 import com.nvkha.repository.UserRepository;
+import com.nvkha.repository.entity.CommentEntity;
 import com.nvkha.repository.entity.PostEntity;
 import com.nvkha.repository.entity.UserEntity;
 import com.nvkha.repository.entity.UserRole;
@@ -29,9 +30,20 @@ public class DbInit {
                         LocalDate.of(1999, 1, 1)
                 );
                 postRepository.save(post);
+                CommentEntity newComment = new CommentEntity("test comment", post, LocalDate.of(1999, 1, 1));
+                CommentEntity newComment1 = new CommentEntity("test comment", post, LocalDate.of(1999, 1, 1));
+                CommentEntity newComment2 = new CommentEntity("test comment", post, LocalDate.of(1999, 1, 1));
+                CommentEntity newComment3 = new CommentEntity("test comment", post, LocalDate.of(1999, 1, 1));
+                if(i == 0) {
+                    commentRepository.save(newComment);
+                    commentRepository.save(newComment1);
+                    commentRepository.save(newComment2);
+                    commentRepository.save(newComment3);
+                }
             }
             UserEntity admin = new UserEntity("admin", passwordEncoder.bCryptPasswordEncoder().encode("12345"), UserRole.ADMIN);
             userRepository.save(admin);
+
         };
     }
 }

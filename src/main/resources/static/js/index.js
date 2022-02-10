@@ -1,5 +1,4 @@
 $("#btnComment").click(async function (e) {
-    e.preventDefault();
     let comment_content = document.getElementById("comment").value;
     let postId = window.location.pathname.split("/");
     postId = postId[postId.length - 1];
@@ -10,6 +9,7 @@ $("#btnComment").click(async function (e) {
         xhr.send(JSON.stringify({
             content: comment_content
         }));
+        window.location.reload();
     } else {
         alert("Comment can't empty");
     }

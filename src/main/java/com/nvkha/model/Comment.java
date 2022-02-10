@@ -3,6 +3,8 @@ package com.nvkha.model;
 import com.nvkha.repository.entity.PostEntity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Comment {
 
@@ -60,5 +62,10 @@ public class Comment {
 
     public void setPost(PostEntity post) {
         this.post = post;
+    }
+
+    public String getDateFormat() {
+        String text = this.createdDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return text;
     }
 }

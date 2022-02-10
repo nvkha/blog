@@ -11,4 +11,7 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
     @Query(value = "SELECT c FROM CommentEntity c WHERE c.post.id = ?1")
     List<CommentEntity> findAllByPost(Long id);
+
+    @Query(value = "DELETE FROM CommentEntity c WHERE c.post.id = ?1")
+    void deleteAllByPost(Long postId);
 }

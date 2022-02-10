@@ -52,12 +52,12 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public void deleteComment(Long commentId) {
-        Optional<CommentEntity> optionalCommentEntity = commentRepository.findById(commentId);
-        if(!optionalCommentEntity.isPresent()) {
-            throw new IllegalIdentifierException("Comment not exists");
+    public void deleteAllCommentByPost(Long postId) {
+        Optional<PostEntity> optionalPostEntity = postRepository.findById(postId);
+        if(!optionalPostEntity.isPresent()) {
+            throw new IllegalIdentifierException("Post not exists");
         }
-        commentRepository.deleteById(commentId);
+        commentRepository.deleteAllByPost(postId);
     }
 
     @Override

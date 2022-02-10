@@ -11,7 +11,7 @@ public interface ICommentService {
 
     void updateComment(Long commentId, String content);
 
-    void deleteComment(Long commentId);
+    void deleteAllCommentByPost(Long postId);
 
     List<Comment> getAllCommentByPost(Long postId);
 }

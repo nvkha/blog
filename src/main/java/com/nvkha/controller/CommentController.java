@@ -40,8 +40,8 @@ public class CommentController {
         commentService.updateComment(commentId, content);
     }
 
-    @DeleteMapping(path = "{commentId}")
-    public void deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+    @DeleteMapping(path = "{postId}")
+    public void deleteAllCommentByPost(@PathVariable Long postId) {
+        commentService.deleteAllCommentByPost(postId);
     }
 }

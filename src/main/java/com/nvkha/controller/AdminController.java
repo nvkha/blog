@@ -3,10 +3,10 @@ package com.nvkha.controller;
 import com.nvkha.model.PaginatedResponse;
 import com.nvkha.model.Post;
 import com.nvkha.model.User;
+import com.nvkha.service.impl.CommentService;
 import com.nvkha.service.impl.HomeService;
 import com.nvkha.service.impl.PostService;
 import com.nvkha.service.impl.UserService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,12 +23,14 @@ public class AdminController {
     private final HomeService homeService;
     private final PostService postService;
     private final UserService userService;
+    private final CommentService commentService;
 
     @Autowired
-    public AdminController(HomeService homeService, PostService postService, UserService userService) {
+    public AdminController(HomeService homeService, PostService postService, UserService userService, CommentService commentService) {
         this.homeService = homeService;
         this.postService = postService;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/manage-posts")
@@ -76,6 +78,7 @@ public class AdminController {
 
     @PostMapping("/manage-posts/delete/{postId}")
     public String delete(@PathVariable Long postId, RedirectAttributes redirAttrs) {
+        commentService.deleteAllCommentByPost(postId);
         postService.deletePost(postId.longValue());
         redirAttrs.addFlashAttribute("message", "Delete post success");
         redirAttrs.addFlashAttribute("type", "success");

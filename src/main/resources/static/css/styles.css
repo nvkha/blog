@@ -10,8 +10,13 @@ textarea {
     max-width: 600px;
 }
 
-footer {
-    min-height: 100px;
+.mt-auto {
+    margin-top: auto!important;
+}
+
+.py-3 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
 }
 
 

@@ -19,4 +19,15 @@ footer {
     margin-bottom: 0px;
 }
 
+.container {
+    width: auto;
+    max-width: 800px;
+    padding: 0 15px;
+}
+
+.container-fluid {
+    width: auto;
+    max-width: 800px;
+    padding: 0 15px;
+}
 

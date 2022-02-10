@@ -4,7 +4,7 @@ $("#btnComment").click(async function (e) {
     postId = postId[postId.length - 1];
     if (comment_content != 'undefined' && comment_content.length > 0) {
         let xhr = await new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/v1/comments" + "?postId=" + postId, true);
+        xhr.open("POST", "https://nvkha-blog.herokuapp.com/api/v1/comments" + "?postId=" + postId, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             content: comment_content
@@ -22,7 +22,7 @@ $("#btnSignup").click(function (e) {
     let pass = document.getElementById("password").value;
     let xhr = new XMLHttpRequest();
     // Example request options
-    fetch("http://localhost:8080/api/v1/registration", {
+    fetch("https://nvkha-blog.herokuapp.com/api/v1/registration", {
         method: 'post', // Default is 'get'
         body: JSON.stringify({
             username: name,
@@ -36,10 +36,10 @@ $("#btnSignup").click(function (e) {
         .then(response => response.text())
         .then(json => {
             if(json.toString() == 'ok') {
-                window.location.assign("http://localhost:8080/signup?isSuccess=true");
+                window.location.assign("https://nvkha-blog.herokuapp.com/signup?isSuccess=true");
             }
             else {
-                window.location.assign("http://localhost:8080/signup?isSuccess=false");
+                window.location.assign("https://nvkha-blog.herokuapp.com/signup?isSuccess=false");
             }
         })
 });
@@ -51,13 +51,13 @@ $("#btnAddPost").click(function (e) {
     if (title != 'undefined' && title.length > 0 &&
         content != 'undefined' && content.length > 0) {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/v1/posts", true);
+        xhr.open("POST", "https://nvkha-blog.herokuapp.com/api/v1/posts", true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             title: title,
             content: content
         }));
-        window.location.assign("http://localhost:8080/admin/manage-posts?message=Add post success" +
+        window.location.assign("https://nvkha-blog.herokuapp.com/admin/manage-posts?message=Add post success" +
         "&type=success");
     } else {
         alert("Title or content can't empty");
@@ -74,11 +74,11 @@ $("#btnSave").click(function (e) {
     if (title != 'undefined' && title.length > 0 &&
         content != 'undefined' && content.length > 0) {
         let xhr = new XMLHttpRequest();
-        xhr.open("PUT", "http://localhost:8080/api/v1/posts/" + id +
+        xhr.open("PUT", "https://nvkha-blog.herokuapp.com/api/v1/posts/" + id +
             "?title=" + title + "&content=" + content, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send();
-        window.location.assign("http://localhost:8080/admin/manage-posts/edit/" +
+        window.location.assign("https://nvkha-blog.herokuapp.com/admin/manage-posts/edit/" +
             id + "?isSuccess=true");
     } else {
         alert("Title or content can't empty");

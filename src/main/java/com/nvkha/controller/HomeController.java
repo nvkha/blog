@@ -36,7 +36,7 @@ public class HomeController {
         model.addAttribute("title", "Blog");
         model.addAttribute("posts", posts);
         model.addAttribute("page", pageInfo);
-        return "index";
+        return "/index";
     }
 
     @GetMapping({"/posts/{id}"})
@@ -45,6 +45,6 @@ public class HomeController {
         List<Comment> comments = homeService.callGetAllCommentByPostApi(id);
         model.addAttribute("post", post);
         model.addAttribute("comments", comments);
-        return "post";
+        return "/post";
     }
 }

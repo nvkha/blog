@@ -15,8 +15,8 @@ import java.util.List;
 
 @Service
 public class HomeService implements IHomeService {
-    final String URI_POSTS = "http://localhost:8080/api/v1/posts";
-    final String URI_COMMENTS = "http://localhost:8080/api/v1/comments";
+    final String URI_POSTS = "https://nvkha-blog.herokuapp.com/api/v1/posts";
+    final String URI_COMMENTS = "https://nvkha-blog.herokuapp.com/api/v1/comments";
 
     @Override
     public ResponseEntity<PaginatedResponse<Post>> callGetAllPostApi(Integer page) {

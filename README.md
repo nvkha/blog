@@ -5,6 +5,9 @@
 
 ## Demo 
 - [Heroku](https://nvkha-blog.herokuapp.com/)
+- Admin account:
+- Username: Admin
+- Password: 12345
 
 
 ## Features
